@@ -121,9 +121,7 @@ export function Sidebar() {
         <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-r from-purple-50 to-sky-50">
           {/* <Shield size={14} className="text-purple-500 shrink-0" /> */}
         </div>
-        <p className="text-[10px] text-gray-300 text-center mt-3">
-          © 2024 Plum Benefits
-        </p>
+       
       </div>
     </aside>
   );
