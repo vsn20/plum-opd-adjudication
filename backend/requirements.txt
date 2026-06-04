@@ -1,0 +1,10 @@
+﻿fastapi
+uvicorn[standard]
+python-multipart
+anthropic
+python-dotenv
+sqlalchemy
+aiosqlite
+pydantic
+pillow
+pymupdf
