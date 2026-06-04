@@ -5,6 +5,7 @@ claims.py — API router for claim submission, adjudication, and status retrieva
 from fastapi import APIRouter, UploadFile, File, Form, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
+from sqlalchemy.orm import selectinload
 from app.database import get_db
 from app.models.claim import Claim, Member, Document, Decision
 from app.services.document_processor import process_document
@@ -154,7 +155,7 @@ async def submit_claim(
 async def list_claims(db: AsyncSession = Depends(get_db)):
     """Fetch all claims with their decisions, ordered by most recent first."""
     result = await db.execute(
-        select(Claim).order_by(Claim.created_at.desc())
+        select(Claim).options(selectinload(Claim.decision)).order_by(Claim.created_at.desc())
     )
     claims = result.scalars().all()
 
@@ -197,7 +198,7 @@ async def list_claims(db: AsyncSession = Depends(get_db)):
 async def get_claim(claim_id: str, db: AsyncSession = Depends(get_db)):
     """Fetch a single claim with its decision."""
     result = await db.execute(
-        select(Claim).where(Claim.claim_id == claim_id)
+        select(Claim).options(selectinload(Claim.decision)).where(Claim.claim_id == claim_id)
     )
     claim = result.scalar_one_or_none()
     if not claim:
