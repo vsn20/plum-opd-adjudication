@@ -1,0 +1,16 @@
+cd backend
+python -m venv venv
+venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python -m uvicorn app.main:app --reload --port 8000
+
+
+cd frontend
+npm install
+npm run dev
+
+
+If you want to run the built-in test cases against the backend:
+cd backend
+venv\Scripts\Activate.ps1
+python verify_tests.py
