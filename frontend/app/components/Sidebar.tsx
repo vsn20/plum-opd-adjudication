@@ -120,10 +120,6 @@ export function Sidebar() {
       <div className="px-4 py-4 border-t border-gray-100">
         <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-r from-purple-50 to-sky-50">
           <Shield size={14} className="text-purple-500 shrink-0" />
-          <p className="text-[10px] text-gray-500 leading-snug">
-            AI-powered adjudication with{" "}
-            <span className="font-semibold text-purple-600">Claude</span>
-          </p>
         </div>
         <p className="text-[10px] text-gray-300 text-center mt-3">
           © 2024 Plum Benefits
