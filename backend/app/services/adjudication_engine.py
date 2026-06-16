@@ -342,9 +342,13 @@ def calculate_approved_amount(
     # Per-claim hard limit
     # Only hard-reject if nothing was excluded (pure over-limit).
     # If items were already excluded (partial claim), cap instead of rejecting.
-    if coverable_amount > POLICY["per_claim_limit"] and not items_were_excluded:
-        reasons.append("PER_CLAIM_EXCEEDED")
-        return reasons, 0.0, 0.0, {}
+    ########
+    if coverable_amount > POLICY["per_claim_limit"]:
+
+        if not items_were_excluded:
+         reasons.append("PER_CLAIM_EXCEEDED")
+         return reasons, 0.0, 0.0, {}
+        coverable_amount = POLICY["per_claim_limit"]
 
     # Annual limit check
     remaining_annual = member.annual_limit - member.claims_ytd
